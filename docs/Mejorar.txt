@@ -1,0 +1,2 @@
+1. Verificar los tamaños mínimos de letra, algunas pueden ser muy pequeñas
+2. Ponerle un efecto tachado o que tenga un resaltado "Visita técnica gratuita. Sin compromiso. Cotización en 24 horas."

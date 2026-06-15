@@ -1,0 +1,1024 @@
+/*
+ * ============================================================
+ *  styles.css — Alarmas Integradas
+ *  Sitio web corporativo | Estilo: Corporate Modern + Glassmorphism
+ *  Última actualización: 2026
+ * ============================================================
+ *
+ *  Índice de secciones:
+ *  1.  Reset
+ *  2.  Variables / Design Tokens
+ *  3.  Tipografía Global
+ *  4.  Base / Body
+ *  5.  Navbar
+ *  6.  Hero
+ *  7.  Trust Bar
+ *  8.  Section Commons
+ *  9.  Services
+ *  10. Why Us (Nosotros)
+ *  11. Gallery
+ *  12. Brands
+ *  13. Testimonials
+ *  14. CTA Band
+ *  15. Contact
+ *  16. Footer
+ *  17. WhatsApp Float
+ *  18. Fade-In Animations
+ *  19. Responsive / Media Queries
+ * ============================================================
+ */
+
+
+/* ─── 1. RESET ───────────────────────────────────────────── */
+/*
+ * Normaliza el modelo de caja y elimina márgenes/paddings
+ * por defecto en todos los elementos, incluyendo pseudo-elementos.
+ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* ─── 2. VARIABLES / DESIGN TOKENS ──────────────────────── */
+/*
+ * Paleta de colores y variables de glassmorphism centralizadas.
+ * Modificar aquí afecta todo el sitio de forma consistente.
+ *
+ * Paleta principal:
+ *   --navy   → Azul marino principal  (#0a2249)
+ *   --yellow → Amarillo de acción     (#fca907)
+ *   --black  → Fondo oscuro base      (#070e1d)
+ *   --white  → Blanco absoluto        (#ffffff)
+ *
+ * Glassmorphism:
+ *   --glass-bg       → Fondo traslúcido claro
+ *   --glass-border   → Borde sutil luminoso
+ *   --glass-bg-dark  → Fondo traslúcido oscuro (navbar, badges)
+ */
+:root {
+  /* Colores base */
+  --navy:    #0a2249;
+  --navy-2:  #0a2249;
+  --blue:    #0d2d5e;
+  --yellow:  #fca907;
+  --yellow-h:#d98e00;   /* hover del amarillo */
+  --white:   #ffffff;
+  --black:   #070e1d;
+
+  /* Escala de grises */
+  --gray-50: #F8FAFC;
+  --gray-100:#F1F5F9;
+  --gray-300:#CBD5E1;   /* texto secundario */
+  --gray-500:#64748B;   /* texto terciario / descripciones */
+  --gray-700:#334155;
+
+  /* Glassmorphism */
+  --glass-bg:      rgba(255, 255, 255, 0.06);
+  --glass-border:  rgba(255, 255, 255, 0.14);
+  --glass-bg-dark: rgba(10, 34, 73, 0.65);
+}
+
+
+/* ─── 3. TIPOGRAFÍA GLOBAL ───────────────────────────────── */
+/*
+ * Escala tipográfica basada en rem para respetar la configuración
+ * de accesibilidad del navegador (html = 16px base).
+ *
+ * Los títulos h1/h2 usan clamp() para escalar fluidamente entre
+ * viewports sin saltos abruptos ni media queries adicionales.
+ *
+ * Referencia de tamaños (con html = 16px):
+ *   h1         → clamp(2rem, 5vw, 3rem)       32px → 48px (fluido)
+ *   h2         → clamp(1.75rem, 4vw, 2.5rem)  28px → 40px (fluido)
+ *   h3         → 2rem     = 32px
+ *   h4         → 1.75rem  = 28px
+ *   h5         → 1.5rem   = 24px
+ *   h6         → 1.25rem  = 20px
+ *   p, li      → 1.125rem = 18px
+ *   a, nav, button, label, input, textarea, select, code, pre
+ *              → 1rem     = 16px
+ *   blockquote → 1.25rem  = 20px
+ *   small, figcaption, caption, footer
+ *              → 0.875rem = 14px
+ *   sup, sub   → 0.75rem  = 12px
+ *
+ * Nota: 16px en inputs/textarea/select previene el zoom automático
+ * en iOS Safari al enfocar campos de formulario.
+ */
+html {
+  font-size: 16px;         /* Base de la escala rem */
+  scroll-behavior: smooth; /* Desplazamiento suave para anclas */
+}
+
+h1 { font-size: clamp(2rem, 5vw, 3rem); }        /* 32px → 48px, fluido */
+h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }   /* 28px → 40px, fluido */
+h3 { font-size: 2rem; }          /* 32px */
+h4 { font-size: 1.75rem; }       /* 28px */
+h5 { font-size: 1.5rem; }        /* 24px */
+h6 { font-size: 1.25rem; }       /* 20px */
+
+p  { font-size: 1.125rem; }      /* 18px — texto principal */
+li { font-size: 1.125rem; }      /* 18px — ítems de lista */
+
+a      { font-size: 1rem; }      /* 16px — enlaces */
+nav    { font-size: 1rem; }      /* 16px — menú de navegación */
+button { font-size: 1rem; }      /* 16px — botones */
+label  { font-size: 1rem; }      /* 16px — etiquetas de formulario */
+
+/* 16px en campos de formulario previene zoom en iOS Safari */
+input,
+textarea,
+select { font-size: 1rem; }
+
+blockquote { font-size: 1.25rem; }  /* 20px — citas y testimonios */
+
+small,
+figcaption,
+caption { font-size: 0.875rem; }    /* 14px — texto secundario */
+
+footer { font-size: 0.875rem; }     /* 14px — pie de página */
+
+code, pre { font-size: 1rem; }      /* 16px — fragmentos de código */
+
+sup, sub { font-size: 0.75rem; }    /* 12px — superíndice y subíndice */
+
+
+/* ─── 4. BASE / BODY ─────────────────────────────────────── */
+/*
+ * Configuración base del documento: fuente, fondo, color de texto
+ * y prevención de scroll horizontal por elementos desbordados.
+ */
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--black);
+  color: var(--white);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+
+/* ─── 5. NAVBAR ──────────────────────────────────────────── */
+/*
+ * Barra de navegación fija con efecto glassmorphism.
+ * Se mantiene visible en la parte superior durante el scroll.
+ * En mobile (≤768px) oculta los links y muestra el hamburger.
+ */
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+  background: rgba(10, 34, 73, 0.72);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px); /* Soporte Safari */
+  border-bottom: 1px solid var(--glass-border);
+  transition: background 0.3s;
+}
+
+/* Contenedor interno centrado con ancho máximo */
+.nav-inner {
+  max-width: 1200px; margin: 0 auto;
+  padding: 0 24px;
+  height: 72px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+/* Logo de la navbar */
+.nav-logo img { height: 44px; width: auto; }
+
+/* Lista de links de navegación (desktop) */
+.nav-links {
+  display: flex; gap: 32px; list-style: none;
+}
+.nav-links a {
+  color: var(--gray-300);
+  text-decoration: none;
+  font-size: 0.875rem; font-weight: 500;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--yellow); }
+
+/* Botón CTA en la navbar (desktop) */
+.nav-cta {
+  background: var(--yellow);
+  color: var(--black);
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-size: 0.875rem; font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+  white-space: nowrap;
+}
+.nav-cta:hover { background: var(--yellow-h); transform: translateY(-1px); }
+
+/* Botón hamburger — visible solo en mobile */
+.hamburger {
+  display: none;
+  flex-direction: column; gap: 5px;
+  cursor: pointer; background: none; border: none; padding: 4px;
+}
+.hamburger span {
+  display: block; width: 24px; height: 2px;
+  background: var(--white); border-radius: 2px;
+  transition: all 0.3s;
+}
+
+/* Menú desplegable mobile (oculto por defecto; .open lo muestra) */
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  background: rgba(10, 34, 73, 0.96);
+  backdrop-filter: blur(18px);
+  padding: 16px 24px 24px;
+  border-top: 1px solid var(--glass-border);
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  color: var(--gray-300); text-decoration: none;
+  padding: 12px 0; font-size: 1rem; font-weight: 500;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+.mobile-menu a:hover { color: var(--yellow); }
+.mobile-menu .nav-cta { margin-top: 16px; text-align: center; }
+
+
+/* ─── 6. HERO ────────────────────────────────────────────── */
+/*
+ * Sección hero a pantalla completa con imagen de fondo
+ * y efecto Ken Burns (zoom suave al cargar la página).
+ * El overlay de gradiente asegura legibilidad del texto.
+ * Layout de dos columnas: copy | tarjeta de estadísticas.
+ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex; align-items: center;
+  overflow: hidden;
+}
+
+/* Fondo fotográfico — escala 1.05 → 1 al cargar (Ken Burns) */
+.hero-bg {
+  position: absolute; inset: 0;
+  background-image: url('assets/images/fotografias/casa segura.jpg');
+  background-size: cover; background-position: center;
+  transform: scale(1.05);
+  transition: transform 8s ease-out;
+}
+/* JS agrega .loaded al evento window load para iniciar la animación */
+.hero-bg.loaded { transform: scale(1); }
+
+/* Overlay de gradiente para oscurecer la imagen y garantizar contraste */
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(10, 34, 73, 0.90) 0%,
+    rgba(10, 34, 73, 0.80) 50%,
+    rgba(10, 34, 73, 0.50) 100%
+  );
+}
+
+/* Grid de dos columnas: copy | tarjeta de estadísticas */
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: 1200px; margin: 0 auto; padding: 120px 24px 80px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+}
+
+/* Badge de credibilidad (pastilla amarilla sobre el H1) */
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(252, 169, 7, 0.15);
+  border: 1px solid rgba(252, 169, 7, 0.35);
+  color: var(--yellow);
+  padding: 6px 14px; border-radius: 999px;
+  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em;
+  text-transform: uppercase; margin-bottom: 20px;
+}
+.hero-badge svg { width: 14px; height: 14px; }
+
+/* Título principal H1 */
+.hero-title {
+  font-weight: 900; line-height: 1.1; letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+.hero-title span { color: var(--yellow); }
+
+/* Subtítulo descriptivo */
+.hero-sub {
+  font-size: 1.05rem; color: var(--gray-300);
+  max-width: 520px; margin-bottom: 36px; line-height: 1.7;
+}
+
+/* Fila de botones CTA */
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* Botón primario — relleno amarillo */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--yellow); color: var(--black);
+  padding: 14px 28px; border-radius: 10px;
+  font-size: 0.95rem; font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 24px rgba(252, 169, 7, 0.30);
+}
+.btn-primary:hover {
+  background: var(--yellow-h); transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(252, 169, 7, 0.40);
+}
+.btn-primary svg { width: 20px; height: 20px; }
+
+/* Botón secundario — borde blanco translúcido */
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.3); color: var(--white);
+  padding: 13px 26px; border-radius: 10px;
+  font-size: 0.95rem; font-weight: 600;
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s, transform 0.15s;
+  backdrop-filter: blur(8px);
+}
+.btn-outline:hover {
+  border-color: var(--yellow); color: var(--yellow); transform: translateY(-2px);
+}
+.btn-outline svg { width: 20px; height: 20px; }
+
+/* Tarjeta glassmorphism con estadísticas de confianza */
+.hero-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px);
+  border-radius: 20px; padding: 36px;
+}
+.hero-card-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 4px; }
+.hero-card-sub   { font-size: 0.82rem; color: var(--gray-300); margin-bottom: 24px; }
+
+/* Grid 2x2 de métricas numéricas */
+.hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.hero-stat-item {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px; padding: 20px 16px; text-align: center;
+}
+.hero-stat-num   { font-size: 2rem; font-weight: 900; color: var(--yellow); display: block; }
+.hero-stat-label { font-size: 0.75rem; color: var(--gray-300); margin-top: 4px; display: block; }
+
+/* Pie de la tarjeta con texto de refuerzo */
+.hero-card-cta {
+  margin-top: 24px; padding-top: 20px;
+  border-top: 1px solid var(--glass-border);
+  display: flex; align-items: center; gap: 12px;
+}
+.hero-card-cta svg    { width: 20px; height: 20px; color: var(--yellow); flex-shrink: 0; }
+.hero-card-cta p      { font-size: 0.82rem; color: var(--gray-300); }
+.hero-card-cta strong { color: var(--white); }
+
+
+/* ─── 7. TRUST BAR ───────────────────────────────────────── */
+/*
+ * Banda horizontal de señales de confianza entre hero y servicios.
+ * Fondo navy, íconos en amarillo, texto en gris claro.
+ */
+.trust-bar {
+  background: var(--navy);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 2px solid var(--yellow);
+  padding: 20px 24px;
+}
+.trust-bar-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: center;
+  gap: 40px; flex-wrap: wrap;
+}
+.trust-item {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 0.875rem; font-weight: 600; color: var(--gray-300);
+}
+.trust-item svg { width: 20px; height: 20px; color: var(--yellow); flex-shrink: 0; }
+
+
+/* ─── 8. SECTION COMMONS ─────────────────────────────────── */
+/*
+ * Estilos compartidos por todas las secciones del sitio.
+ * Padding, ancho máximo, etiqueta, título y descripción de sección.
+ */
+section { padding: 96px 24px; }
+
+/* Wrapper interno centrado */
+.section-inner { max-width: 1200px; margin: 0 auto; }
+
+/* Etiqueta pequeña en amarillo sobre el título */
+.section-label {
+  display: inline-block;
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--yellow);
+  margin-bottom: 12px;
+}
+
+/* Título principal de sección (H2) — fluido */
+.section-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 800; line-height: 1.15; letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+/* Descripción de sección */
+.section-desc {
+  font-size: 1.05rem; color: var(--gray-500);
+  max-width: 600px; line-height: 1.7;
+}
+
+/* Encabezado de sección con espacio inferior */
+.section-header { margin-bottom: 56px; }
+.section-header.center { text-align: center; }
+.section-header.center .section-desc { margin: 0 auto; }
+
+
+/* ─── 9. SERVICES ────────────────────────────────────────── */
+/*
+ * Grid de tarjetas de servicios con glassmorphism.
+ * 3 columnas desktop → 2 tablet → 1 mobile (acordeón en JS).
+ */
+#servicios { background: var(--navy); }
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* Tarjeta individual */
+.service-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(12px);
+  border-radius: 16px; padding: 32px 28px;
+  transition: border-color 0.3s, transform 0.25s, box-shadow 0.3s;
+  cursor: default;
+}
+.service-card:hover {
+  border-color: rgba(252, 169, 7, 0.45);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.4);
+}
+
+/* Ícono Heroicons */
+.service-icon  { width: 48px; height: 48px; color: var(--yellow); margin-bottom: 18px; }
+
+/* Nombre del servicio */
+.service-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+
+/* Descripción del servicio */
+.service-desc  { font-size: 0.875rem; color: var(--gray-500); line-height: 1.65; }
+
+
+/* ─── 10. WHY US (NOSOTROS) ──────────────────────────────── */
+/*
+ * Sección "Porqué elegirnos": imagen con badge | lista de ventajas.
+ * Fondo con gradiente negro → navy.
+ */
+#nosotros {
+  background: linear-gradient(180deg, var(--black) 0%, var(--navy) 100%);
+}
+
+/* Grid de dos columnas */
+.why-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+}
+
+/* Imagen con bordes redondeados */
+.why-image-wrap {
+  position: relative; border-radius: 20px; overflow: hidden;
+}
+.why-image-wrap img {
+  width: 100%; height: 420px; object-fit: cover; border-radius: 20px;
+  display: block;
+}
+
+/* Badge de experiencia superpuesto sobre la imagen */
+.why-image-badge {
+  position: absolute; bottom: 24px; left: 24px;
+  background: rgba(10, 34, 73, 0.80);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px; padding: 16px 20px;
+  display: flex; align-items: center; gap: 12px;
+}
+.why-image-badge svg { width: 28px; height: 28px; color: var(--yellow); }
+.why-image-badge-text strong { display: block; font-size: 1.1rem; font-weight: 800; }
+.why-image-badge-text span   { font-size: 0.78rem; color: var(--gray-300); }
+
+/* Lista de ventajas competitivas */
+.why-list { list-style: none; display: flex; flex-direction: column; gap: 24px; }
+
+/* Ítem: ícono + texto */
+.why-item { display: flex; gap: 16px; align-items: flex-start; }
+
+/* Contenedor cuadrado del ícono */
+.why-icon {
+  width: 44px; height: 44px; flex-shrink: 0;
+  background: rgba(252, 169, 7, 0.12);
+  border: 1px solid rgba(252, 169, 7, 0.25);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+}
+.why-icon svg { width: 22px; height: 22px; color: var(--yellow); }
+
+/* Texto de ventaja */
+.why-item-text strong { display: block; font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
+.why-item-text p      { font-size: 0.875rem; color: var(--gray-500); line-height: 1.6; }
+
+
+/* ─── 11. GALLERY ────────────────────────────────────────── */
+/*
+ * Galería en grid uniforme con zoom y overlay en hover.
+ * 3 columnas desktop → 2 tablet → 1 mobile.
+ * Todos los cuadros tienen la misma altura (260px).
+ */
+#galeria { background: var(--navy); }
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto;
+  gap: 16px;
+}
+
+.gallery-item {
+  border-radius: 14px; overflow: hidden;
+  position: relative;
+}
+.gallery-item img {
+  width: 100%; height: 260px; object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.gallery-item:hover img  { transform: scale(1.05); }
+
+/* Overlay de gradiente navy que aparece al hacer hover */
+.gallery-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(0deg, rgba(10, 34, 73, 0.6) 0%, transparent 60%);
+  opacity: 0; transition: opacity 0.3s;
+}
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+
+
+/* ─── 12. BRANDS ─────────────────────────────────────────── */
+/*
+ * Fila de logos de marcas aliadas en glassmorphism.
+ * Logos en blanco (filter invert) con hover en amarillo.
+ */
+#marcas { background: var(--black); }
+
+.brands-row {
+  display: flex; flex-wrap: wrap;
+  align-items: center; justify-content: center;
+  gap: 16px;
+}
+
+/* Pastilla individual de marca */
+.brand-pill {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px; padding: 16px 28px;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color 0.3s, background 0.3s;
+  min-width: 140px; height: 72px;
+}
+.brand-pill:hover {
+  border-color: rgba(252, 169, 7, 0.4);
+  background: rgba(255, 255, 255, 0.09);
+}
+
+/* Logo convertido a blanco, se ilumina al hover */
+.brand-pill img {
+  max-height: 34px; max-width: 110px; object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+.brand-pill:hover img { opacity: 1; }
+
+
+/* ─── 13. TESTIMONIALS ───────────────────────────────────── */
+/*
+ * Tres tarjetas de testimonios glassmorphism.
+ * Incluyen: estrellas, cita en cursiva, avatar con iniciales.
+ * Fondo negro → navy.
+ */
+#testimonios {
+  background: linear-gradient(180deg, var(--black) 0%, var(--navy) 100%);
+}
+
+.testimonials-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+}
+
+/* Tarjeta individual */
+.testimonial-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(12px);
+  border-radius: 16px; padding: 28px;
+  transition: border-color 0.3s, transform 0.25s;
+}
+.testimonial-card:hover {
+  border-color: rgba(252, 169, 7, 0.35);
+  transform: translateY(-4px);
+}
+
+/* Estrellas de calificación */
+.stars { display: flex; gap: 4px; margin-bottom: 16px; }
+.stars svg { width: 18px; height: 18px; color: var(--yellow); }
+
+/* Cita del cliente en cursiva */
+.testimonial-text {
+  font-size: 0.9rem; color: var(--gray-300);
+  line-height: 1.7; margin-bottom: 20px;
+  font-style: italic;
+}
+
+/* Fila de autor: avatar + nombre/ubicación */
+.testimonial-author { display: flex; align-items: center; gap: 12px; }
+
+/* Avatar circular con iniciales */
+.author-avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--navy-2), var(--blue));
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 0.9rem; color: var(--yellow);
+  flex-shrink: 0;
+}
+.author-name { font-size: 0.875rem; font-weight: 700; }
+.author-loc  { font-size: 0.78rem; color: var(--gray-500); }
+
+
+/* ─── 14. CTA BAND ───────────────────────────────────────── */
+/*
+ * Sección de llamado a la acción con tarjeta glassmorphism.
+ * Efectos decorativos de brillo con pseudo-elementos:
+ *   ::before → resplandor navy centrado arriba
+ *   ::after  → resplandor amarillo tenue abajo a la derecha
+ */
+.cta-band {
+  background: var(--black);
+  position: relative; overflow: hidden;
+}
+
+/* Resplandor navy decorativo */
+.cta-band::before {
+  content: '';
+  position: absolute; top: -20%; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 500px;
+  background: radial-gradient(ellipse, rgba(10, 34, 73, 0.75) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Resplandor amarillo decorativo */
+.cta-band::after {
+  content: '';
+  position: absolute; bottom: -20%; right: -10%;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(252, 169, 7, 0.08) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+/* Tarjeta glassmorphism centrada */
+.cta-band-inner {
+  max-width: 760px; margin: 0 auto; text-align: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 24px;
+  padding: 56px 48px;
+  position: relative; z-index: 2; /* Sobre los pseudo-elementos */
+}
+
+/* Ícono decorativo grande */
+.cta-icon {
+  width: 56px; height: 56px;
+  color: var(--yellow);
+  margin: 0 auto 20px;
+}
+
+/* Título del CTA */
+.cta-band h2 {
+  font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+  font-weight: 900; margin-bottom: 16px; letter-spacing: -0.02em;
+}
+.cta-band h2 span { color: var(--yellow); }
+
+/* Descripción del CTA */
+.cta-band p {
+  font-size: 1.05rem; color: rgba(255, 255, 255, 0.75); margin-bottom: 36px;
+}
+
+/* Fila de botones */
+.cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+/* Botón blanco con texto navy */
+.btn-white {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--white); color: var(--navy);
+  padding: 14px 28px; border-radius: 10px;
+  font-size: 0.95rem; font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+.btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35); }
+.btn-white svg { width: 20px; height: 20px; }
+
+/* Botón amarillo con texto negro */
+.btn-yellow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--yellow); color: var(--black);
+  padding: 14px 28px; border-radius: 10px;
+  font-size: 0.95rem; font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-yellow:hover { background: var(--yellow-h); transform: translateY(-2px); }
+.btn-yellow svg { width: 20px; height: 20px; }
+
+
+/* ─── 15. CONTACT ────────────────────────────────────────── */
+/*
+ * Sección de contacto con encabezado de cierre de venta
+ * y tarjeta glassmorphism con datos de contacto.
+ * Fondo negro. Impulsa contacto por WhatsApp (sin formulario en v1).
+ */
+#contacto { background: var(--black); }
+
+/* Encabezado persuasivo centrado */
+.contact-cta-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 48px;
+}
+.contact-cta-header .section-label { color: var(--yellow); }
+
+/* Título grande del cierre de venta */
+.contact-cta-title {
+  font-size: clamp(1.9rem, 3.8vw, 2.8rem);
+  font-weight: 900; line-height: 1.1; letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+.contact-cta-title span { color: var(--yellow); }
+
+/* Subtítulo persuasivo */
+.contact-cta-sub { font-size: 1.05rem; color: var(--gray-300); line-height: 1.7; }
+
+/* Tarjeta principal glassmorphism */
+.contact-grid {
+  display: grid; grid-template-columns: 1fr; align-items: start;
+  max-width: 640px; margin: 0 auto;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 24px;
+  padding: 48px 52px;
+}
+
+/* Lista de datos de contacto */
+.contact-info { display: flex; flex-direction: column; gap: 20px; }
+
+/* Ítem individual: ícono + texto */
+.contact-item { display: flex; align-items: flex-start; gap: 16px; }
+
+/* Contenedor cuadrado del ícono */
+.contact-icon {
+  width: 48px; height: 48px; flex-shrink: 0;
+  background: rgba(252, 169, 7, 0.10);
+  border: 1px solid rgba(252, 169, 7, 0.22);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+}
+.contact-icon svg { width: 22px; height: 22px; color: var(--yellow); }
+
+/* Texto del dato de contacto */
+.contact-item-text strong { display: block; font-size: 0.875rem; font-weight: 700; margin-bottom: 2px; }
+.contact-item-text a,
+.contact-item-text span   { font-size: 0.9rem; color: var(--gray-300); text-decoration: none; }
+.contact-item-text a:hover { color: var(--yellow); }
+
+/* ── Formulario (conservado en CSS; no usado en HTML v1) ── */
+.contact-form {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(14px);
+  border-radius: 20px; padding: 36px;
+}
+.form-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 24px; }
+.form-group { margin-bottom: 16px; }
+.form-group label {
+  display: block; font-size: 0.82rem; font-weight: 600;
+  color: var(--gray-300); margin-bottom: 6px;
+}
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px; padding: 12px 14px;
+  color: var(--white); font-family: 'Inter', sans-serif; font-size: 0.9rem;
+  outline: none; transition: border-color 0.2s, background 0.2s;
+  resize: vertical;
+}
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: var(--yellow); background: rgba(255, 255, 255, 0.08);
+}
+.form-group select option { background: var(--navy); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.btn-submit {
+  width: 100%; padding: 14px;
+  background: var(--yellow); color: var(--black);
+  border: none; border-radius: 10px;
+  font-size: 0.95rem; font-weight: 700;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  transition: background 0.2s, transform 0.15s;
+  margin-top: 8px;
+}
+.btn-submit:hover { background: var(--yellow-h); transform: translateY(-1px); }
+.btn-submit svg { width: 20px; height: 20px; }
+
+
+/* ─── 16. FOOTER ─────────────────────────────────────────── */
+/*
+ * Pie de página en navy con tres columnas:
+ *   - 2fr: Marca (logo + descripción)
+ *   - 1fr: Servicios (lista de links)
+ *   - 1fr: Empresa (links internos)
+ * Footer-bottom: copyright + redes sociales + hecho en CR.
+ */
+footer {
+  background: var(--navy);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 56px 24px 24px;
+}
+.footer-inner { max-width: 1200px; margin: 0 auto; }
+
+/* Tres columnas superiores */
+.footer-top {
+  display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Columna de marca */
+.footer-brand img { height: 44px; margin-bottom: 16px; }
+.footer-brand p   { font-size: 0.875rem; color: var(--gray-500); line-height: 1.7; max-width: 300px; }
+
+/* Columnas de links */
+.footer-col h4 { font-size: 0.875rem; font-weight: 700; margin-bottom: 16px; color: var(--white); }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-col ul li a {
+  font-size: 0.875rem; color: var(--gray-500);
+  text-decoration: none; transition: color 0.2s;
+}
+.footer-col ul li a:hover { color: var(--yellow); }
+
+/* Fila inferior: copyright + redes */
+.footer-bottom {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px;
+  padding-top: 24px;
+}
+.footer-bottom p { font-size: 0.8rem; color: var(--gray-500); }
+
+/* Íconos de redes sociales */
+.footer-social { display: flex; gap: 12px; }
+.social-btn {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, border-color 0.2s;
+  text-decoration: none;
+}
+.social-btn:hover {
+  background: rgba(252, 169, 7, 0.15);
+  border-color: rgba(252, 169, 7, 0.35);
+}
+.social-btn svg { width: 18px; height: 18px; color: var(--gray-300); }
+
+
+/* ─── 17. WHATSAPP FLOAT ─────────────────────────────────── */
+/*
+ * Botón flotante de WhatsApp en la esquina inferior derecha.
+ * Animación de pulso continuo para llamar la atención sin ser intrusivo.
+ * z-index 998 para quedar bajo modales pero sobre el contenido.
+ */
+.wa-float {
+  position: fixed; bottom: 28px; right: 28px; z-index: 998;
+  width: 60px; height: 60px; border-radius: 50%;
+  background: #25D366; /* Verde oficial de WhatsApp */
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 28px rgba(37, 211, 102, 0.45);
+  text-decoration: none;
+  animation: pulse-wa 2.5s infinite;
+  transition: transform 0.2s;
+}
+.wa-float:hover { transform: scale(1.1); }
+.wa-float svg { width: 30px; height: 30px; color: white; }
+
+/* Oscila la sombra entre dos intensidades */
+@keyframes pulse-wa {
+  0%, 100% { box-shadow: 0 6px 28px rgba(37, 211, 102, 0.45); }
+  50%       { box-shadow: 0 6px 40px rgba(37, 211, 102, 0.70); }
+}
+
+
+/* ─── 18. FADE-IN ANIMATIONS ─────────────────────────────── */
+/*
+ * Clase base para animaciones de aparición al hacer scroll.
+ * IntersectionObserver (script.js) añade .visible cuando el elemento
+ * entra al viewport, disparando la transición de opacidad y posición.
+ */
+.fade-in {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* ─── 19. RESPONSIVE / MEDIA QUERIES ────────────────────── */
+/*
+ * Breakpoints del sitio:
+ *   ≤1024px → Tablet: grids de 3 columnas pasan a 2
+ *   ≤768px  → Mobile: columna única, hamburger, acordeón de servicios
+ */
+
+/* ── Tablet (≤1024px) ── */
+@media (max-width: 1024px) {
+  .services-grid      { grid-template-columns: repeat(2, 1fr); }
+  .testimonials-grid  { grid-template-columns: repeat(2, 1fr); }
+  .gallery-grid       { grid-template-columns: repeat(2, 1fr); }
+  .footer-top         { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── Mobile (≤768px) ── */
+@media (max-width: 768px) {
+  /* Navbar: oculta links desktop, activa hamburger */
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+
+  /* Hero: columna única, oculta tarjeta de stats */
+  .hero-content { grid-template-columns: 1fr; padding-top: 100px; }
+  .hero-card    { display: none; }
+
+  /* Layouts en columna única */
+  .why-grid          { grid-template-columns: 1fr; }
+  .services-grid     { grid-template-columns: 1fr; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .gallery-grid      { grid-template-columns: 1fr; }
+  .footer-top        { grid-template-columns: 1fr; gap: 32px; }
+
+  .trust-bar-inner { gap: 20px; }
+  section          { padding: 64px 24px; }
+  .contact-grid    { padding: 32px 24px; }
+
+  /*
+   * Acordeón de servicios en mobile:
+   * Por defecto muestra solo ícono + título.
+   * Al hacer tap, la clase .open (JS) expande la descripción.
+   * .service-chevron es inyectado por JS al inicializar el acordeón.
+   */
+  .service-card {
+    display: flex; flex-wrap: wrap;
+    align-items: center; gap: 0 12px;
+    cursor: pointer; padding: 20px 18px;
+  }
+  .service-icon  { width: 30px; height: 30px; margin-bottom: 0; flex-shrink: 0; }
+  .service-title { flex: 1; margin-bottom: 0; font-size: 0.95rem; }
+
+  /* Chevron inyectado por JS — rota al abrirse */
+  .service-chevron {
+    width: 18px; height: 18px;
+    color: var(--yellow); flex-shrink: 0;
+    transition: transform 0.3s ease;
+  }
+  .service-card.open .service-chevron { transform: rotate(180deg); }
+
+  /* Descripción colapsada por defecto, se expande con max-height */
+  .service-desc {
+    width: 100%;
+    max-height: 0; overflow: hidden; opacity: 0;
+    transition: max-height 0.35s ease, opacity 0.25s ease, padding-top 0.25s ease;
+    padding-top: 0;
+  }
+  .service-card.open .service-desc {
+    max-height: 200px; opacity: 1; padding-top: 10px;
+  }
+}

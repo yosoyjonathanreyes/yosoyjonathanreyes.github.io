@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect x="32" y="32" width="448" height="448" rx="42" fill="#0A2240"/>
+  
+  <!-- House -->
+  <path d="M120 220 L256 110 L392 220" fill="none" stroke="#FFFFFF" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M145 210 V360 H367 V210" fill="none" stroke="#FFFFFF" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M335 145 V205" fill="none" stroke="#FFFFFF" stroke-width="18" stroke-linecap="round"/>
+
+  <!-- Chain -->
+  <g fill="none" stroke="#FFB800" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <ellipse cx="110" cy="265" rx="18" ry="12" transform="rotate(25 110 265)"/>
+    <ellipse cx="145" cy="278" rx="18" ry="12" transform="rotate(20 145 278)"/>
+    <ellipse cx="180" cy="288" rx="18" ry="12" transform="rotate(10 180 288)"/>
+    <ellipse cx="220" cy="295" rx="18" ry="12"/>
+    <ellipse cx="292" cy="295" rx="18" ry="12"/>
+    <ellipse cx="332" cy="288" rx="18" ry="12" transform="rotate(-10 332 288)"/>
+    <ellipse cx="367" cy="278" rx="18" ry="12" transform="rotate(-20 367 278)"/>
+    <ellipse cx="402" cy="265" rx="18" ry="12" transform="rotate(-25 402 265)"/>
+  </g>
+
+  <!-- Lock -->
+  <path d="M228 315 v-18 c0-20 12-34 28-34s28 14 28 34v18" fill="none" stroke="#FFB800" stroke-width="12"/>
+  <rect x="208" y="315" width="96" height="82" rx="12" fill="#FFB800"/>
+  <circle cx="256" cy="350" r="8" fill="#0A2240"/>
+  <rect x="252" y="350" width="8" height="20" fill="#0A2240"/>
+</svg>
