@@ -67,11 +67,11 @@
   --white:   #ffffff;
   --black:   #070e1d;
 
-  /* Escala de grises */
+  /* Escala de grises / cremas */
   --gray-50: #F8FAFC;
   --gray-100:#F1F5F9;
-  --gray-300:#CBD5E1;   /* texto secundario */
-  --gray-500:#64748B;   /* texto terciario / descripciones */
+  --gray-300:rgba(255,255,255,0.85);  /* blanco 85% — texto secundario sobre navy */
+  --gray-500:rgba(255,255,255,0.75);  /* blanco 75% — descripciones y footer sobre navy */
   --gray-700:#334155;
 
   /* Glassmorphism */
@@ -238,7 +238,16 @@ body {
   border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 .mobile-menu a:hover { color: var(--yellow); }
-.mobile-menu .nav-cta { margin-top: 16px; text-align: center; }
+.mobile-menu .nav-cta {
+  margin-top: 16px;
+  text-align: center;
+  color: var(--black);
+  border-radius: 10px;
+  padding: 14px 28px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  box-shadow: 0 4px 24px rgba(252, 169, 7, 0.30);
+}
 
 
 /* ─── 6. HERO ────────────────────────────────────────────── */
@@ -873,7 +882,7 @@ footer {
 }
 
 /* Columna de marca */
-.footer-brand img { height: 44px; margin-bottom: 16px; }
+.footer-brand img { width: 100%; max-width: 300px; height: auto; margin-bottom: 16px; }
 .footer-brand p   { font-size: 0.875rem; color: var(--gray-500); line-height: 1.7; max-width: 300px; }
 
 /* Columnas de links */
@@ -971,7 +980,7 @@ footer {
 /* ── Mobile (≤768px) ── */
 @media (max-width: 768px) {
   /* Navbar: oculta links desktop, activa hamburger */
-  .nav-links, .nav-cta { display: none; }
+  .nav-links, .nav-inner > .nav-cta { display: none; } /* Oculta solo el CTA del desktop, no el del mobile-menu */
   .hamburger { display: flex; }
 
   /* Hero: columna única, oculta tarjeta de stats */
